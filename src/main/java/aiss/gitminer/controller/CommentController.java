@@ -19,12 +19,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/gitminer")
 public class CommentController {
-    @Autowired
-    IssueRepository issueRepository;
 
     @Autowired
     CommentService commentService;
-    // GET http://localhost:8080/gitminer/issues/{issueId}
+
+    // GET http://localhost:8080/gitminer/comments
     @GetMapping("/comments")
     public List<Comment> getAllComments(){
         return commentService.getAllComments();
@@ -34,5 +33,11 @@ public class CommentController {
     @GetMapping("/comments/{commentId}")
     public Comment findOne(@PathVariable(value="commentId") String commentId) throws CommentNotFoundException {
         return commentService.findOne(commentId);
+    }
+
+    // GET http://localhost:8080/gitminer/issues/{issueId}/comments
+    @GetMapping("/issues/{issueId}/{commentId}")
+    public List<Comment> getAllCommentsByIssue(@PathVariable(value="issueId") String issueId) throws CommentNotFoundException {
+        return commentService.getAllCommentsByIssue(issueId);
     }
 }
