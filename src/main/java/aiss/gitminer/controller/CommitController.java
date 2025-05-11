@@ -1,12 +1,7 @@
 package aiss.gitminer.controller;
 
-import aiss.gitminer.exception.CommentNotFoundException;
 import aiss.gitminer.exception.CommitNotFoundException;
-import aiss.gitminer.exception.ProjectNotFoundException;
-import aiss.gitminer.model.Comment;
 import aiss.gitminer.model.Commit;
-import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.CommitRepository;
 import aiss.gitminer.repository.ProjectRepository;
 import aiss.gitminer.service.CommitService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,12 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 @Tag(name="Commit", description = "Commit management API")
 @RestController
 @RequestMapping("/gitminer")

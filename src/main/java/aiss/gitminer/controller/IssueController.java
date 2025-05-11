@@ -1,12 +1,7 @@
 package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.IssueNotFoundException;
-import aiss.gitminer.exception.ProjectNotFoundException;
 import aiss.gitminer.model.Issue;
-import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.CommitRepository;
-import aiss.gitminer.repository.IssueRepository;
-import aiss.gitminer.repository.ProjectRepository;
 import aiss.gitminer.service.IssueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 @Tag(name = "Issue", description = "Issue management API")
 @RestController
 @RequestMapping("/gitminer")

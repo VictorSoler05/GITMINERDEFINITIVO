@@ -2,7 +2,6 @@ package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.ProjectNotFoundException;
 import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.ProjectRepository;
 import aiss.gitminer.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,14 +11,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.print.Pageable;
 import java.util.List;
-import java.util.Optional;
 //http://localhost:8080/swagger-ui/index.html
 @Tag(name = "Project", description = "Project management API")
 @RestController

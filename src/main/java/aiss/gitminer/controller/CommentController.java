@@ -2,11 +2,7 @@ package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.CommentNotFoundException;
 import aiss.gitminer.exception.IssueNotFoundException;
-import aiss.gitminer.exception.ProjectNotFoundException;
 import aiss.gitminer.model.Comment;
-import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.CommentRepository;
-import aiss.gitminer.repository.IssueRepository;
 import aiss.gitminer.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
