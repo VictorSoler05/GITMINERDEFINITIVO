@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
-
+//http://localhost:8080/swagger-ui/index.html
 @Tag(name = "Project", description = "Project management API")
 @RestController
 @RequestMapping("/gitminer/projects")
