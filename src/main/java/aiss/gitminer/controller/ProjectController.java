@@ -5,10 +5,12 @@ import aiss.gitminer.model.Project;
 import aiss.gitminer.repository.ProjectRepository;
 import aiss.gitminer.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +22,12 @@ public class ProjectController {
 
     // GET http://localhost:8080/gitminer/projects
     @GetMapping
-    public List<Project> findAll() {
-        return projectService.findAll();
+    public List<Project> findAll(@RequestParam(required = false) String name,
+                                 @RequestParam(required = false) String order,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size) {
+
+        return projectService.findAll(name, order, page, size);
     }
 
     // GET http://localhost:8080/gitminer/projects/{id}
