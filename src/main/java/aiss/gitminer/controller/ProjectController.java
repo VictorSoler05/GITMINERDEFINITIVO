@@ -115,7 +115,7 @@ public class ProjectController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Error de formato en el cuerpo de la petición",
+                    description = "Error de formato en el cuerpo de la peticiÃ³n",
                     content = @Content(schema = @Schema())
             ),
             @ApiResponse(
