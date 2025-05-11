@@ -30,14 +30,10 @@ public class CommitController {
         return commitService.getAllCommits();
     }
 
-    // GET http://localhost:8080/gitminer/commits/{id}
+    // GET http://localhost:8080/gitminer/commits/{commitId}
     @GetMapping("/commits/{commitId}")
-    public Commit findOne(@PathVariable(value="commitId") String commitId) throws CommentNotFoundException {
-        try{
-            return commitService.findOne(commitId);
-        } catch (CommitNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public Commit findOne(@PathVariable(value="commitId") String commitId) throws CommitNotFoundException {
+        return commitService.findOne(commitId);
     }
 
 }

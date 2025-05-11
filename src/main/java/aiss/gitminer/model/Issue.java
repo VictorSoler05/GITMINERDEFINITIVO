@@ -18,8 +18,8 @@ public class Issue {
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("ref_id")
-    private String refId;
+    /*@JsonProperty("ref_id")
+    private String refId;*/
     @JsonProperty("title")
     private String title;
     @JsonProperty("description")
@@ -46,11 +46,11 @@ public class Issue {
     @JoinColumn(name = "assignee_id",referencedColumnName = "id")
     @OneToOne(cascade=CascadeType.ALL)
     private User assignee;
-    @JsonProperty("upvotes")
-    private Integer upvotes;
-
+    @JsonProperty("votes")
+    private Integer votes;
+/*
     @JsonProperty("web_url")
-    private String webUrl;
+    private String webUrl;*/
 
     @JsonProperty("comments")
     @OneToMany(cascade = CascadeType.ALL)
@@ -64,14 +64,14 @@ public class Issue {
     public void setId(String id) {
         this.id = id;
     }
-
+/*
     public String getRefId() {
         return refId;
     }
 
     public void setRefId(String refId) {
         this.refId = refId;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -145,21 +145,21 @@ public class Issue {
         this.assignee = assignee;
     }
 
-    public Integer getUpvotes() {
-        return upvotes;
+    public Integer getVotes() {
+        return votes;
     }
 
-    public void setUpvotes(Integer upvotes) {
-        this.upvotes = upvotes;
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
-
+/*
     public String getWebUrl() {
         return webUrl;
     }
 
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
-    }
+    }*/
 
     public List<Comment> getComments() {
         return comments;
@@ -176,11 +176,11 @@ public class Issue {
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null) ? "<null>" : this.id));
-        sb.append(',');
+        sb.append(',');/*
         sb.append("refId");
         sb.append('=');
         sb.append(((this.refId == null) ? "<null>" : this.refId));
-        sb.append(',');
+        sb.append(',');*/
         sb.append("title");
         sb.append('=');
         sb.append(((this.title == null) ? "<null>" : this.title));
@@ -217,9 +217,9 @@ public class Issue {
         sb.append('=');
         sb.append(((this.assignee == null) ? "<null>" : this.assignee));
         sb.append(',');
-        sb.append("upvotes");
+        sb.append("votes");
         sb.append('=');
-        sb.append(((this.upvotes == null) ? "<null>" : this.upvotes));
+        sb.append(((this.votes == null) ? "<null>" : this.votes));
         sb.append(',');
         sb.append("comments");
         sb.append('=');

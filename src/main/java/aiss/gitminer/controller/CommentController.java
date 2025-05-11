@@ -1,6 +1,7 @@
 package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.CommentNotFoundException;
+import aiss.gitminer.exception.IssueNotFoundException;
 import aiss.gitminer.exception.ProjectNotFoundException;
 import aiss.gitminer.model.Comment;
 import aiss.gitminer.model.Project;
@@ -36,8 +37,8 @@ public class CommentController {
     }
 
     // GET http://localhost:8080/gitminer/issues/{issueId}/comments
-    @GetMapping("/issues/{issueId}/{commentId}")
-    public List<Comment> getAllCommentsByIssue(@PathVariable(value="issueId") String issueId) throws CommentNotFoundException {
+    @GetMapping("/issues/{issueId}/comments")
+    public List<Comment> getAllCommentsByIssue(@PathVariable(value="issueId") String issueId) throws IssueNotFoundException {
         return commentService.getAllCommentsByIssue(issueId);
     }
 }

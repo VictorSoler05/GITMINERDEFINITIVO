@@ -29,13 +29,8 @@ public class IssueController {
 
     // GET http://localhost:8080/gitminer/issues/{issueId}
     @GetMapping("/issues/{issueId}")
-    public Issue findOne(@PathVariable(value="issueId") String issueId) {
-
-        try {
-            return issueService.findOne(issueId);
-        } catch (IssueNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public Issue findOne(@PathVariable(value="issueId") String issueId) throws IssueNotFoundException{
+        return issueService.findOne(issueId);
     }
 
 }

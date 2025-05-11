@@ -7,7 +7,9 @@ import aiss.gitminer.repository.CommitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommitService {
@@ -18,7 +20,9 @@ public class CommitService {
         return commitRepository.findAll();    }
 
     public Commit findOne(String commitId) throws CommitNotFoundException {
-        return commitRepository.findById(commitId).get();
+        Optional<Commit> commit=commitRepository.findById(commitId);
+        if(!commit.isPresent()) throw new CommitNotFoundException();
+        return commit.get();
     }
 
 
