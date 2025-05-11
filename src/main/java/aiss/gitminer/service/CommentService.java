@@ -27,20 +27,14 @@ public class CommentService {
 
     public List<Comment> getAllComments(String order, int page, int size){
         Pageable paging;
-        if (order != null) {
-            Sort sort;
-
-            if (order.startsWith("-")) {
-                String sortBy = order.substring(1);
-                sort = Sort.by(Sort.Direction.DESC, sortBy);
-            } else {
-                sort = Sort.by(Sort.Direction.ASC, order);
-            }
-
-            paging = PageRequest.of(page, size, sort);
-        } else {
-            paging = PageRequest.of(page, size);
+        if(order != null) {
+            if (order.startsWith("-"))
+                paging = PageRequest.of(page, size, Sort.by(order.substring(1)).descending());
+            else
+                paging = PageRequest.of(page, size, Sort.by(order).ascending());
         }
+        else
+            paging = PageRequest.of(page, size);
 
         Page<Comment> pageComments;
         pageComments = commentRepository.findAll(paging);
