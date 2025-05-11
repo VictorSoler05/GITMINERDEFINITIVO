@@ -19,7 +19,7 @@ public class CommitService {
     @Autowired
     CommitRepository commitRepository;
 
-    public List<Commit> getAllCommits(String name, String order, int page, int size){
+    public List<Commit> getAllCommits(String title, String order, int page, int size){
         Pageable paging;
         if(order != null) {
             if (order.startsWith("-"))
@@ -32,10 +32,10 @@ public class CommitService {
 
         Page<Commit> pageCommits;
 
-        if (name ==null){
+        if (title ==null){
             pageCommits = commitRepository.findAll(paging);
         } else {
-            pageCommits = commitRepository.findByName(name, paging);
+            pageCommits = commitRepository.findByTitle(title, paging);
         }
 
         return pageCommits.getContent();
