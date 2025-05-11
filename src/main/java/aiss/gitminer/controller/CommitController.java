@@ -26,8 +26,11 @@ public class CommitController {
     CommitService commitService;
     // GET http://localhost:8080/gitminer/commits
     @GetMapping("/commits")
-    public List<Commit> getAllCommits()  {
-        return commitService.getAllCommits();
+    public List<Commit> getAllCommits(@RequestParam(required = false) String name,
+                                      @RequestParam(required = false) String order,
+                                      @RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "10") int size)  {
+        return commitService.getAllCommits(name, order, page, size);
     }
 
     // GET http://localhost:8080/gitminer/commits/{commitId}

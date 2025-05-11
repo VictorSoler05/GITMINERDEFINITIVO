@@ -28,11 +28,7 @@ public class ProjectService {
         @Autowired
         ProjectRepository projectRepository;
 
-        public List<Project> findAll(
-                @RequestParam(required = false) String name,
-                @RequestParam(required = false) String order,
-                @RequestParam(defaultValue = "0") int page,
-                @RequestParam(defaultValue = "10") int size){
+        public List<Project> findAll(String name, String order, int page, int size){
 
             Pageable paging;
             if(order != null) {

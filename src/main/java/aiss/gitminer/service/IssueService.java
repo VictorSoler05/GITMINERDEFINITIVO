@@ -1,13 +1,14 @@
 package aiss.gitminer.service;
 
 
-import aiss.gitminer.exception.CommitNotFoundException;
 import aiss.gitminer.exception.IssueNotFoundException;
-import aiss.gitminer.model.Commit;
 import aiss.gitminer.model.Issue;
-import aiss.gitminer.repository.CommitRepository;
 import aiss.gitminer.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,30 @@ public class IssueService {
     @Autowired
     IssueRepository issueRepository;
 
-    public List<Issue> getAllIssues(String state, String authorId){
-        return issueRepository.findAll().stream()
+    public List<Issue> getAllIssues(String state, String authorId, String title, String order, int page, int size) {
+        Pageable paging;
+        if(order != null) {
+            if (order.startsWith("-"))
+                paging = PageRequest.of(page, size, Sort.by(order.substring(1)).descending());
+            else
+                paging = PageRequest.of(page, size, Sort.by(order).ascending());
+        }
+        else
+            paging = PageRequest.of(page, size);
+
+        Page<Issue> pageIssues;
+
+        if (title ==null){
+            pageIssues = issueRepository.findAll(paging);
+        } else {
+            pageIssues = issueRepository.findByTitle(title, paging);
+        }
+
+        return pageIssues.getContent().stream()
                 .filter(issue -> state.equals("all") || issue.getState().equalsIgnoreCase(state))
                 .filter(issue -> authorId.equals("all") || issue.getAuthor().getId().equalsIgnoreCase(authorId))
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
+
     }
 
     public Issue findOne(String issueId) throws IssueNotFoundException {

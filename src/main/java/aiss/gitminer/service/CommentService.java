@@ -2,16 +2,18 @@ package aiss.gitminer.service;
 
 
 import aiss.gitminer.exception.CommentNotFoundException;
-import aiss.gitminer.exception.CommitNotFoundException;
 import aiss.gitminer.exception.IssueNotFoundException;
 import aiss.gitminer.model.Comment;
 import aiss.gitminer.model.Issue;
 import aiss.gitminer.repository.CommentRepository;
 import aiss.gitminer.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,21 @@ public class CommentService {
     @Autowired
     IssueRepository issueRepository;
 
-    public List<Comment> getAllComments(){
-        return commentRepository.findAll();
+    public List<Comment> getAllComments(String order, int page, int size){
+        Pageable paging;
+        if(order != null) {
+            if (order.startsWith("-"))
+                paging = PageRequest.of(page, size, Sort.by(order.substring(1)).descending());
+            else
+                paging = PageRequest.of(page, size, Sort.by(order).ascending());
+        }
+        else
+            paging = PageRequest.of(page, size);
+
+        Page<Comment> pageComments;
+        pageComments = commentRepository.findAll(paging);
+
+        return pageComments.getContent();
     }
 
     public Comment findOne(String commentId) throws CommentNotFoundException {

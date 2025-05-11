@@ -9,10 +9,7 @@ import aiss.gitminer.repository.CommentRepository;
 import aiss.gitminer.repository.IssueRepository;
 import aiss.gitminer.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +23,10 @@ public class CommentController {
 
     // GET http://localhost:8080/gitminer/comments
     @GetMapping("/comments")
-    public List<Comment> getAllComments(){
-        return commentService.getAllComments();
+    public List<Comment> getAllComments(@RequestParam(required = false) String order,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size){
+        return commentService.getAllComments(order, page, size);
     }
 
     // GET http://localhost:8080/gitminer/comments/{commentId}

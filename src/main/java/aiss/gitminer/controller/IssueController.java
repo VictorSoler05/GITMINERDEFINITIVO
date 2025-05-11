@@ -22,9 +22,13 @@ public class IssueController {
     IssueService issueService;
     // GET http://localhost:8080/gitminer/issues
     @GetMapping("/issues")
-    public List<Issue> getAllIssuesByState(@RequestParam(name = "state", defaultValue = "all") String state,
-                                           @RequestParam(name = "authorId", defaultValue = "all") String authorId){
-        return issueService.getAllIssues(state,authorId);
+    public List<Issue> getAllIssues(@RequestParam(name = "state", defaultValue = "all") String state,
+                                    @RequestParam(name = "authorId", defaultValue = "all") String authorId,
+                                    @RequestParam(required = false) String title,
+                                    @RequestParam(required = false) String order,
+                                    @RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size){
+        return issueService.getAllIssues(state, authorId, title, order, page, size);
     }
 
     // GET http://localhost:8080/gitminer/issues/{issueId}
